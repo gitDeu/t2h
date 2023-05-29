@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>Download Text as HTML File</title>
+
+  <!-- Include Tailwind CSS from CDN -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/tailwind.min.css">
+
+</head>
+
+<body class="bg-gray-100">
+
+  <div class="container mx-auto mt-8">
+
+    <h1 class="text-2xl font-bold mb-4">Download Text as HTML File</h1>
+
+    <textarea id="textArea" class="w-full px-3 py-2 border border-gray-300 rounded-md"></textarea>
+
+    <button id="downloadButton" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Download</button>
+
+  </div>
+
+  <script>
+
+    // Get references to the text area and download button
+
+    const textArea = document.getElementById("textArea");
+
+    const downloadButton = document.getElementById("downloadButton");
+
+    // Add event listener to the download button
+
+    downloadButton.addEventListener("click", () => {
+
+      // Get the content of the text area
+
+      const textContent = textArea.value;
+
+      // Create a new Blob object with the text content and MIME type of "text/html"
+
+      const blob = new Blob([textContent], { type: "text/html" });
+
+      // Create a new anchor element to act as a download link
+
+      const downloadLink = document.createElement("a");
+
+      // Set the download link's href and download attributes
+
+      downloadLink.href = URL.createObjectURL(blob);
+
+      downloadLink.download = "index.html";
+
+      // Add the download link to the document and click it programmatically to start the download
+
+      document.body.appendChild(downloadLink);
+
+      downloadLink.click();
+
+      // Clean up the download link element and URL object
+
+      document.body.removeChild(downloadLink);
+
+      URL.revokeObjectURL(downloadLink.href);
+
+    });
+
+  </script>
+
+</body>
+
+</html>
